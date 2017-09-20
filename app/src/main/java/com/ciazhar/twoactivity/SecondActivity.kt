@@ -12,10 +12,13 @@ import android.widget.TextView
 class SecondActivity : AppCompatActivity() {
 
     companion object {
+        ///key untuk menampung message yang akan di kirim ke main activiy
         val EXTRA_REPLY = "com.ciazhar.twoactivity.extra.REPLY"
+        // log untuk second activity
         private val LOG_TAG = SecondActivity::class.java.simpleName
     }
 
+    ///variabel dibawah merupakan implementasi dari view
     private var mReply : EditText ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +28,9 @@ class SecondActivity : AppCompatActivity() {
         mReply = findViewById(R.id.editText_second) as EditText
 
         val intent = intent
+
         val message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE)
+
         val textView = findViewById(R.id.text_message) as TextView
         textView.text = message
     }
