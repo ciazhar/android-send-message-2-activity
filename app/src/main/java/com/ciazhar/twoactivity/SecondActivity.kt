@@ -24,15 +24,15 @@ class SecondActivity : AppCompatActivity() {
 
         mReply = findViewById(R.id.editText_second) as EditText
 
-        var intent = intent
-        var message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE)
-        var textView = findViewById(R.id.text_message) as TextView
+        val intent = intent
+        val message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE)
+        val textView = findViewById(R.id.text_message) as TextView
         textView.text = message
     }
 
     fun returnReply(view: View)   {
-        var reply = mReply?.text.toString()
-        var replyIntent = Intent()
+        val reply = mReply?.text.toString()
+        val replyIntent = Intent()
         replyIntent.putExtra(EXTRA_REPLY, reply)
         setResult(Activity.RESULT_OK,replyIntent)
         Log.d(LOG_TAG,"End Second Activity")

@@ -31,13 +31,22 @@ class MainActivity : AppCompatActivity() {
         mMessageEditText = findViewById(R.id.editText_main) as EditText?
         mReplyHeadTextView = findViewById(R.id.text_header_reply) as TextView?
         mReplyTextView = findViewById(R.id.text_message) as TextView?
+
+        if(savedInstanceState!=null){
+            val isVisible : Boolean = savedInstanceState.getBoolean("reply_visible")
+            if(isVisible){
+                mReplyHeadTextView?.visibility = View.VISIBLE
+                mReplyTextView?.text = savedInstanceState.getString("reply_text")
+                mReplyTextView?.visibility = View.VISIBLE
+            }
+        }
     }
 
     fun launchSecondActivity(view: View) {
         Log.d(LOG_TAG, "Button clicked!")
 
-        var intent = Intent(this, SecondActivity::class.java)
-        var message = mMessageEditText?.text.toString()
+        val intent = Intent(this, SecondActivity::class.java)
+        val message = mMessageEditText?.text.toString()
 
         intent.putExtra(EXTRA_MESSAGE,message)
         startActivityForResult(intent, TEXT_REQUEST)
@@ -47,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode== TEXT_REQUEST){
             if (resultCode== Activity.RESULT_OK){
-                var reply = data.getStringExtra(SecondActivity.EXTRA_REPLY)
+                val reply = data.getStringExtra(SecondActivity.EXTRA_REPLY)
                 mReplyHeadTextView?.visibility = View.VISIBLE
                 mReplyTextView?.text = reply
                 mReplyTextView?.visibility = View.VISIBLE
@@ -85,7 +94,13 @@ class MainActivity : AppCompatActivity() {
         Log.d(LOG_TAG,"Starting onDestroy")
     }
 
-
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        if(mReplyHeadTextView?.visibility ==View.VISIBLE){
+            outState?.putBoolean("reply_visible",true)
+            outState?.putString("reply_text",mReplyTextView?.text.toString())
+        }
+    }
 
 }
 
