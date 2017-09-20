@@ -25,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Log.d(LOG_TAG, "-----")
+        Log.d(LOG_TAG, "Starting onCreate")
+
         mMessageEditText = findViewById(R.id.editText_main) as EditText?
         mReplyHeadTextView = findViewById(R.id.text_header_reply) as TextView?
         mReplyTextView = findViewById(R.id.text_message) as TextView?
@@ -52,7 +55,35 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.d(LOG_TAG,"Starting onStart")
+    }
 
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(LOG_TAG,"Starting onRestart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(LOG_TAG,"Starting onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(LOG_TAG,"Starting onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(LOG_TAG,"Starting onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(LOG_TAG,"Starting onDestroy")
+    }
 
 
 
